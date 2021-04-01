@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/recipeListFragment">
+
+    <fragment
+        android:id="@+id/recipeListFragment"
+        android:name="com.edwin.recipeapp.presentation.ui.recipesList.RecipeListFragment"
+        android:label="Recipes"
+        tools:layout="@layout/recipe_list_fragment">
+        <action
+            android:id="@+id/action_recipeListFragment_to_recipeDetailsFragment"
+            app:destination="@id/recipeDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipeDetailsFragment"
+        android:name="com.edwin.recipeapp.presentation.ui.recipeDetails.RecipeDetailsFragment"
+        android:label="{title}"
+        tools:layout="@layout/recipe_details_fragment">
+        <action
+            android:id="@+id/action_recipeDetailsFragment_to_recipeListFragment"
+            app:destination="@id/recipeListFragment" />
+        <argument
+            android:name="Recipe"
+            app:argType="com.edwin.recipeapp.data.domain.Recipe" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
+</navigation>

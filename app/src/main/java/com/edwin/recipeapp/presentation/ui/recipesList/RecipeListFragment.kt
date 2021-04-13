@@ -16,7 +16,6 @@ import com.edwin.recipeapp.R
 import com.edwin.recipeapp.data.domain.Recipe
 import com.edwin.recipeapp.databinding.RecipeListFragmentBinding
 import com.edwin.recipeapp.util.Resource
-import com.edwin.recipeapp.util.SortOrder
 import com.edwin.recipeapp.util.onQueryTextChanged
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -25,7 +24,7 @@ import kotlinx.coroutines.flow.collect
 @AndroidEntryPoint
 @ExperimentalCoroutinesApi
 class RecipeListFragment : Fragment(R.layout.recipe_list_fragment),
-        RecipeAdapter.OnItemClickListener {
+    RecipeAdapter.OnItemClickListener {
 
     private val viewModel: RecipeListViewModel by viewModels()
     private lateinit var searchView: SearchView
@@ -48,9 +47,9 @@ class RecipeListFragment : Fragment(R.layout.recipe_list_fragment),
             recipeAdapter.submitList(result.data)
 
             binding.progressBar.isVisible =
-                    result is Resource.Loading && result.data.isNullOrEmpty()
+                result is Resource.Loading && result.data.isNullOrEmpty()
             binding.textViewError.isVisible =
-                    result is Resource.Error && result.data.isNullOrEmpty()
+                result is Resource.Error && result.data.isNullOrEmpty()
             binding.textViewError.text = result.error?.localizedMessage
         })
 
@@ -59,10 +58,10 @@ class RecipeListFragment : Fragment(R.layout.recipe_list_fragment),
                 when (event) {
                     is RecipeListViewModel.RecipeListEvents.NavigateToRecipeDetailScreen -> {
                         val action =
-                                RecipeListFragmentDirections.actionRecipeListFragmentToRecipeDetailsFragment(
-                                        event.recipe,
-                                        event.recipe.name
-                                )
+                            RecipeListFragmentDirections.actionRecipeListFragmentToRecipeDetailsFragment(
+                                event.recipe,
+                                event.recipe.name
+                            )
                         findNavController().navigate(action)
                     }
                 }
@@ -91,22 +90,11 @@ class RecipeListFragment : Fragment(R.layout.recipe_list_fragment),
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_sort_by_name -> {
-                viewModel.onSortOrderSelected(SortOrder.BY_NAME)
-                true
-            }
-
-            R.id.action_sort_by_date -> {
-                viewModel.onSortOrderSelected(SortOrder.BY_DATE)
-                true
-            }
-
-            R.id.action_sort_by_difficulty -> {
-                viewModel.onSortOrderSelected(SortOrder.BY_DIFFICULTY)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+        return if (item.itemId == R.id.action_sort) {
+            findNavController().navigate(RecipeListFragmentDirections.actionRecipeListFragmentToBottomSheetFragment())
+            true
+        } else {
+            super.onOptionsItemSelected(item)
         }
     }
 

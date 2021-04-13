@@ -15,7 +15,7 @@ import javax.inject.Singleton
 
 private const val TAG = "PreferencesManager"
 
-enum class SortOrder { BY_NAME, BY_DATE, BY_DIFFICULTY }
+enum class SortOrder { BY_NAME, BY_DATE }
 
 @Singleton
 class PreferencesManager @Inject constructor(@ApplicationContext context: Context) {

@@ -15,7 +15,6 @@ interface RecipeDao {
             when (sortOrder) {
                 SortOrder.BY_NAME -> getAllRecipesByName(query)
                 SortOrder.BY_DATE -> getAllRecipesByDate(query)
-                SortOrder.BY_DIFFICULTY -> getAllRecipesByDifficulty(query)
             }
 
     @Query("SELECT * FROM recipe WHERE name LIKE '%' || :searchQuery || '%' ORDER BY name")
@@ -23,9 +22,6 @@ interface RecipeDao {
 
     @Query("SELECT * FROM recipe WHERE name LIKE '%' || :searchQuery || '%' ORDER BY lastUpdated")
     fun getAllRecipesByDate(searchQuery: String): Flow<List<Recipe>>
-
-    @Query("SELECT * FROM recipe WHERE name LIKE '%' || :searchQuery || '%' ORDER BY difficulty")
-    fun getAllRecipesByDifficulty(searchQuery: String): Flow<List<Recipe>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRecipes(recipes: List<Recipe>)

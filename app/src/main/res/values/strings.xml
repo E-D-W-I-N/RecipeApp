@@ -1,12 +1,10 @@
 <resources>
-    <string name="app_name">RecipeApp</string>
+    <string name="app_name">Recipes</string>
     <string name="recipe_image">recipe_image</string>
-    <string name="difficulty">Difficulty: %d</string>
     <string name="search">Search</string>
     <string name="sort">Sort</string>
     <string name="sort_by_name">Sort by name</string>
     <string name="sort_by_date">Sort by date</string>
-    <string name="sort_by_difficulty">Sort by difficulty</string>
-    <string name="fork_and_knife_logo">fork_and_knife_logo</string>
-    <string name="choose_the_recipe">Choose the recipe :)</string>
+    <string name="room_service_icon">room_service_icon</string>
+    <string name="today_icon">today_icon</string>
 </resources>

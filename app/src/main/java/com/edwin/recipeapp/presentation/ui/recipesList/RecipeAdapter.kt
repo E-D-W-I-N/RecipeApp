@@ -6,20 +6,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.edwin.recipeapp.R
 import com.edwin.recipeapp.data.domain.Recipe
 import com.edwin.recipeapp.databinding.RecipeItemBinding
-import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 class RecipeAdapter(private val listener: OnItemClickListener) :
-        ListAdapter<Recipe, RecipeAdapter.RecipeViewHolder>(DiffCallback()) {
+    ListAdapter<Recipe, RecipeAdapter.RecipeViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val binding = RecipeItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
         return RecipeViewHolder(binding)
     }
@@ -32,7 +31,7 @@ class RecipeAdapter(private val listener: OnItemClickListener) :
     }
 
     inner class RecipeViewHolder(private val binding: RecipeItemBinding) :
-            RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.apply {
@@ -46,13 +45,12 @@ class RecipeAdapter(private val listener: OnItemClickListener) :
         fun bind(recipe: Recipe) {
             binding.apply {
                 Glide.with(itemView)
-                        .load(recipe.images.first())
-                        .into(imageViewLogo)
+                    .load(recipe.images.first())
+                    .into(imageViewLogo)
                 textViewName.text = recipe.name
                 textViewDescription.text = recipe.description
-                textViewDifficulty.text = itemView.context.getString(R.string.difficulty, recipe.difficulty)
-                textViewLastUpdated.text = DateFormat.getDateInstance(DateFormat.SHORT)
-                        .format(Date(recipe.lastUpdated * 1000))
+                textViewLastUpdated.text = SimpleDateFormat("dd.MM.yyyy", Locale.US)
+                    .format(Date(recipe.lastUpdated * 1000))
             }
         }
     }
@@ -63,7 +61,7 @@ class RecipeAdapter(private val listener: OnItemClickListener) :
 
     class DiffCallback : DiffUtil.ItemCallback<Recipe>() {
         override fun areItemsTheSame(oldItem: Recipe, newItem: Recipe) =
-                oldItem.uuid == newItem.uuid
+            oldItem.uuid == newItem.uuid
 
         override fun areContentsTheSame(oldItem: Recipe, newItem: Recipe) = oldItem == newItem
     }

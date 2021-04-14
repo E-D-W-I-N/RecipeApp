@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_recipeListFragment_to_recipeDetailsFragment"
             app:destination="@id/recipeDetailsFragment" />
+        <action
+            android:id="@+id/action_recipeListFragment_to_bottomSheetFragment"
+            app:destination="@id/bottomSheetFragment" />
     </fragment>
     <fragment
         android:id="@+id/recipeDetailsFragment"
@@ -29,4 +32,13 @@
             android:name="title"
             app:argType="string" />
     </fragment>
+    <dialog
+        android:id="@+id/bottomSheetFragment"
+        android:name="com.edwin.recipeapp.presentation.ui.recipesList.bottomsheet.BottomSheetFragment"
+        android:label="bottom_sheet_fragment"
+        tools:layout="@layout/bottom_sheet_fragment">
+        <action
+            android:id="@+id/action_bottomSheetFragment_to_recipeListFragment"
+            app:destination="@id/recipeListFragment" />
+    </dialog>
 </navigation>

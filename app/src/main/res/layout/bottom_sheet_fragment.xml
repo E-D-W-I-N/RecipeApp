@@ -6,55 +6,38 @@
     android:layout_height="wrap_content"
     tools:context=".presentation.ui.recipesList.bottomsheet.BottomSheetFragment">
 
-    <ImageView
-        android:id="@+id/sort_by_name_icon"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/sort_by_name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_room_service"
-        android:contentDescription="@string/room_service_icon" />
-
-    <TextView
-        android:id="@+id/sort_by_name_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="20dp"
+        android:drawablePadding="32dp"
+        android:gravity="center_vertical"
         android:text="@string/sort_by_name"
         android:textColor="#333333"
-        app:layout_constraintBottom_toBottomOf="@+id/sort_by_name_icon"
+        app:drawableStartCompat="@drawable/ic_room_service"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/sort_by_date_icon"
-        app:layout_constraintTop_toTopOf="@+id/sort_by_name_icon" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/sort_by_date_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="24dp"
-        android:text="@string/sort_by_date"
-        android:textColor="#333333"
-        app:layout_constraintBottom_toBottomOf="@+id/sort_by_date_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/sort_by_date_icon"
-        app:layout_constraintTop_toTopOf="@+id/sort_by_date_icon" />
-
-    <ImageView
-        android:id="@+id/sort_by_date_icon"
-        android:layout_width="wrap_content"
+        android:id="@+id/sort_by_date"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="24dp"
-        android:contentDescription="@string/today_icon"
+        android:drawablePadding="32dp"
+        android:gravity="center_vertical"
+        android:text="@string/sort_by_date"
+        android:textColor="#333333"
+        app:drawableStartCompat="@drawable/ic_today"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sort_by_name_icon"
-        app:srcCompat="@drawable/ic_today" />
+        app:layout_constraintTop_toBottomOf="@id/sort_by_name" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,11 +29,11 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         val binding = BottomSheetFragmentBinding.bind(view)
 
         binding.apply {
-            sortByNameText.setOnClickListener {
+            sortByName.setOnClickListener {
                 viewModel.onSortOrderSelected(SortOrder.BY_NAME)
                 dismiss()
             }
-            sortByDateText.setOnClickListener {
+            sortByDate.setOnClickListener {
                 viewModel.onSortOrderSelected(SortOrder.BY_DATE)
                 dismiss()
             }

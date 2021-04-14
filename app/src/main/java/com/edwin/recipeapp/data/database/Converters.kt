@@ -1,6 +1,9 @@
 package com.edwin.recipeapp.data.database
 
 import androidx.room.TypeConverter
+import com.edwin.recipeapp.data.domain.RecipeBrief
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class Converters {
     @TypeConverter
@@ -11,5 +14,19 @@ class Converters {
     @TypeConverter
     fun toString(stringList: List<String>): String {
         return stringList.joinToString(separator = "<&>")
+    }
+
+    @TypeConverter
+    fun fromCountryLangList(value: List<RecipeBrief>): String {
+        val gson = Gson()
+        val type = object : TypeToken<List<RecipeBrief>>() {}.type
+        return gson.toJson(value, type)
+    }
+
+    @TypeConverter
+    fun toCountryLangList(value: String): List<RecipeBrief> {
+        val gson = Gson()
+        val type = object : TypeToken<List<RecipeBrief>>() {}.type
+        return gson.fromJson(value, type)
     }
 }

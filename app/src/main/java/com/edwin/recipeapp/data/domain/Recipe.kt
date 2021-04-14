@@ -13,6 +13,6 @@ data class Recipe(
         val images: List<String>,
         val lastUpdated: Long,
         val description: String?,
-        val instructions: String,
+        val instructions: String?,
         val difficulty: Int
 ) : Parcelable

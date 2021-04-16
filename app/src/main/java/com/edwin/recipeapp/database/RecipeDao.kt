@@ -1,11 +1,11 @@
-package com.edwin.recipeapp.data.database
+package com.edwin.recipeapp.database
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.edwin.recipeapp.data.domain.Recipe
-import com.edwin.recipeapp.data.domain.RecipeDetails
+import com.edwin.recipeapp.domain.Recipe
+import com.edwin.recipeapp.domain.RecipeDetails
 import com.edwin.recipeapp.util.SortOrder
 import kotlinx.coroutines.flow.Flow
 

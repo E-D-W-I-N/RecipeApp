@@ -6,12 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".presentation.ui.recipeDetails.RecipeDetailsFragment">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_view_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -22,59 +44,160 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".presentation.ui.recipeDetails.RecipeDetailsFragment">
+                android:layout_height="match_parent">
 
                 <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/viewPager2"
+                    android:id="@+id/viewPagerPictures"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="24dp"
-                    android:clipToPadding="false"
-                    android:clipChildren="false"
-                    android:paddingStart="70dp"
-                    android:paddingEnd="70dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/pager_tab_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintBottom_toBottomOf="@id/viewPagerPictures"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:tabBackground="@drawable/tab_pager_selector"
+                    app:tabGravity="center"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabMaxWidth="8dp" />
 
                 <TextView
                     android:id="@+id/detail_text_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/gray_4A"
+                    android:textSize="28sp"
                     android:textStyle="bold"
+                    android:typeface="normal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/viewPager2" />
+                    app:layout_constraintTop_toBottomOf="@+id/viewPagerPictures"
+                    tools:text="Pan Roasted Chicken with Lemon, Garlic, Green Beans
+                and Red Potatoes" />
+
+                <TextView
+                    android:id="@+id/detail_text_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/gray_4A"
+                    android:typeface="normal"
+                    app:layout_constraintBottom_toBottomOf="@+id/detail_text_name"
+                    app:layout_constraintEnd_toEndOf="@+id/detail_text_name"
+                    tools:text="01.05.2018" />
 
                 <TextView
                     android:id="@+id/detail_text_description"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:textStyle="italic"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/gray_9C"
+                    android:typeface="normal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_text_name" />
+                    app:layout_constraintTop_toBottomOf="@+id/detail_text_name"
+                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
+
+                <TextView
+                    android:id="@+id/detail_text_difficulty"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/difficulty"
+                    android:textColor="@color/gray_4A"
+                    android:textSize="18sp"
+                    android:typeface="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detail_text_description" />
+
+                <RatingBar
+                    android:id="@+id/detailDifficultyBar"
+                    style="@style/difficulty_rating_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detail_text_difficulty" />
+
+
+                <TextView
+                    android:id="@+id/detail_text_instructions_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/instruction"
+                    android:textColor="@color/gray_4A"
+                    android:textSize="18sp"
+                    android:typeface="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailDifficultyBar" />
 
                 <TextView
                     android:id="@+id/detail_text_instructions"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/gray_9C"
+                    android:typeface="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detail_text_instructions_title"
+                    tools:text="Preheat oven to 190 C, 375 F, Gas Mark 5. Grate one of the lemons
+                    mixture with the olive oil. Place the chicken on a roasting rack" />
+
+                <TextView
+                    android:id="@+id/detail_text_recommended_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/recommended"
+                    android:textColor="@color/gray_4A"
+                    android:textSize="18sp"
+                    android:typeface="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detail_text_instructions" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPagerRecommended"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="24dp"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="140dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_text_description" />
+                    app:layout_constraintTop_toBottomOf="@id/detail_text_recommended_title" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

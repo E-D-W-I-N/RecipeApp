@@ -7,4 +7,8 @@
     <string name="sort_by_date">Sort by date</string>
     <string name="room_service_icon">room_service_icon</string>
     <string name="today_icon">today_icon</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="instruction">Instruction</string>
+    <string name="recommended">Recommended</string>
+    <string name="download">Download</string>
 </resources>

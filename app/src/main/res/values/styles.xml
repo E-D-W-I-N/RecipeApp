@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="roundedCornersImageView" parent="">
+    <style name="roundedCornersListItem" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">4dp</item>
+    </style>
+
+    <style name="roundedCornersRecommendedItem" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <style name="difficulty_rating_bar" parent="Widget.AppCompat.RatingBar.Indicator">
+        <item name="android:progressDrawable">@drawable/difficulty_bar_selector</item>
+        <item name="android:minHeight">30dp</item>
+        <item name="android:maxHeight">30dp</item>
     </style>
 </resources>

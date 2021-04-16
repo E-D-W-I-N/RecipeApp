@@ -1,7 +1,7 @@
-package com.edwin.recipeapp.data.database
+package com.edwin.recipeapp.database
 
 import androidx.room.TypeConverter
-import com.edwin.recipeapp.data.domain.RecipeBrief
+import com.edwin.recipeapp.domain.RecipeBrief
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

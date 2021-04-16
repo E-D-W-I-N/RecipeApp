@@ -20,17 +20,19 @@
     <fragment
         android:id="@+id/recipeDetailsFragment"
         android:name="com.edwin.recipeapp.presentation.ui.recipeDetails.RecipeDetailsFragment"
-        android:label="{title}"
         tools:layout="@layout/recipe_details_fragment">
         <action
             android:id="@+id/action_recipeDetailsFragment_to_recipeListFragment"
             app:destination="@id/recipeListFragment" />
         <argument
-            android:name="Recipe"
-            app:argType="com.edwin.recipeapp.data.domain.Recipe" />
-        <argument
-            android:name="title"
+            android:name="uuid"
             app:argType="string" />
+        <action
+            android:id="@+id/action_recipeDetailsFragment_self"
+            app:destination="@id/recipeDetailsFragment" />
+        <action
+            android:id="@+id/action_recipeDetailsFragment_to_recipePictureFragment"
+            app:destination="@id/recipePictureFragment" />
     </fragment>
     <dialog
         android:id="@+id/bottomSheetFragment"
@@ -41,4 +43,15 @@
             android:id="@+id/action_bottomSheetFragment_to_recipeListFragment"
             app:destination="@id/recipeListFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/recipePictureFragment"
+        android:name="com.edwin.recipeapp.presentation.ui.recipeDetails.recipePicture.RecipePictureFragment"
+        tools:layout="@layout/recipe_picuter_fragment">
+        <action
+            android:id="@+id/action_recipePictureFragment_to_recipeDetailsFragment"
+            app:destination="@id/recipeDetailsFragment" />
+        <argument
+            android:name="imageUrl"
+            app:argType="string" />
+    </fragment>
 </navigation>

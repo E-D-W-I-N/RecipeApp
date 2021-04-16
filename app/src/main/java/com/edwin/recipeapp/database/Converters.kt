@@ -17,16 +17,14 @@ class Converters {
     }
 
     @TypeConverter
-    fun fromCountryLangList(value: List<RecipeBrief>): String {
-        val gson = Gson()
+    fun fromRecipeBriefList(value: List<RecipeBrief>?): String {
         val type = object : TypeToken<List<RecipeBrief>>() {}.type
-        return gson.toJson(value, type)
+        return Gson().toJson(value, type)
     }
 
     @TypeConverter
-    fun toCountryLangList(value: String): List<RecipeBrief> {
-        val gson = Gson()
+    fun toRecipeBriefList(value: String): List<RecipeBrief>? {
         val type = object : TypeToken<List<RecipeBrief>>() {}.type
-        return gson.fromJson(value, type)
+        return Gson().fromJson(value, type)
     }
 }

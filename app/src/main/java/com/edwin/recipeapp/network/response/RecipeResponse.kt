@@ -1,9 +1,9 @@
 package com.edwin.recipeapp.network.response
 
-import com.edwin.recipeapp.domain.RecipeDetails
+import com.edwin.recipeapp.domain.Recipe
 import com.google.gson.annotations.SerializedName
 
-data class RecipeDetailsResponse(
+data class RecipeResponse(
     @SerializedName("recipe")
-    val recipeDetails: RecipeDetails
+    val recipe: Recipe
 )

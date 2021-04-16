@@ -14,5 +14,6 @@ data class Recipe(
         val lastUpdated: Long,
         val description: String?,
         val instructions: String?,
-        val difficulty: Int
+        val difficulty: Int,
+        val similar: List<RecipeBrief>?
 ) : Parcelable

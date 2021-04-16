@@ -13,23 +13,23 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RecipeDetailsViewModel @Inject constructor(
-        repository: RecipeRepository,
-        state: SavedStateHandle
+    repository: RecipeRepository,
+    state: SavedStateHandle
 ) : ViewModel() {
     val uuid = state.get<String>("uuid")
-    val recipeDetails = uuid?.let { repository.getRecipeDetails(it) }?.asLiveData()
+    val recipe = uuid?.let { repository.getRecipe(it) }?.asLiveData()
     private val recipeEventChannel = Channel<RecipeDetailsEvents>()
     val recipesEvent = recipeEventChannel.receiveAsFlow()
 
     fun onRecommendedRecipeSelected(uuid: String) = viewModelScope.launch {
         recipeEventChannel.send(
-                RecipeDetailsEvents.NavigateToRecommendedRecipe(uuid)
+            RecipeDetailsEvents.NavigateToRecommendedRecipe(uuid)
         )
     }
 
     fun onRecipePictureSelected(imageUrl: String) = viewModelScope.launch {
         recipeEventChannel.send(
-                RecipeDetailsEvents.NavigateToRecipePicture(imageUrl)
+            RecipeDetailsEvents.NavigateToRecipePicture(imageUrl)
         )
     }
 

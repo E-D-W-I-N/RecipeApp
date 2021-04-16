@@ -13,10 +13,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class RecipeAdapter(private val listener: OnItemClickListener<Recipe>) :
-        ListAdapter<Recipe, RecipeAdapter.RecipeViewHolder>(DiffCallback()) {
+    ListAdapter<Recipe, RecipeAdapter.RecipeViewHolder>(DiffCallback()) {
 
     inner class RecipeViewHolder(private val binding: RecipeItemBinding) :
-            RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.apply {
@@ -30,21 +30,21 @@ class RecipeAdapter(private val listener: OnItemClickListener<Recipe>) :
         fun bind(recipe: Recipe) {
             binding.apply {
                 Glide.with(itemView)
-                        .load(recipe.images.first())
-                        .into(imageViewLogo)
+                    .load(recipe.images.first())
+                    .into(imageViewLogo)
                 textViewName.text = recipe.name
                 textViewDescription.text = recipe.description
                 textViewLastUpdated.text = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-                        .format(Date(recipe.lastUpdated * 1000))
+                    .format(Date(recipe.lastUpdated * 1000))
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val binding = RecipeItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
         return RecipeViewHolder(binding)
     }
@@ -58,7 +58,7 @@ class RecipeAdapter(private val listener: OnItemClickListener<Recipe>) :
 
     class DiffCallback : DiffUtil.ItemCallback<Recipe>() {
         override fun areItemsTheSame(oldItem: Recipe, newItem: Recipe) =
-                oldItem.uuid == newItem.uuid
+            oldItem.uuid == newItem.uuid
 
         override fun areContentsTheSame(oldItem: Recipe, newItem: Recipe) = oldItem == newItem
     }

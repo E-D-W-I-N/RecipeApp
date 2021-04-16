@@ -18,8 +18,8 @@ class RecipePictureFragment : Fragment(R.layout.recipe_picuter_fragment) {
         super.onViewCreated(view, savedInstanceState)
         val binding = RecipePicuterFragmentBinding.bind(view)
         Glide.with(view)
-                .load(viewModel.imageUrl)
-                .into(binding.recipePicture)
+            .load(viewModel.imageUrl)
+            .into(binding.recipePicture)
         setHasOptionsMenu(true)
     }
 

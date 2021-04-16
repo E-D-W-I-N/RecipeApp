@@ -1,4 +1,4 @@
-package com.edwin.recipeapp.data.domain
+package com.edwin.recipeapp.domain
 
 import android.os.Parcelable
 import androidx.room.Entity

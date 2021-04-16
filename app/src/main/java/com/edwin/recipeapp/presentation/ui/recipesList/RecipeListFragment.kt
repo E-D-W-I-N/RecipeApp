@@ -13,8 +13,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.edwin.recipeapp.R
-import com.edwin.recipeapp.data.domain.Recipe
 import com.edwin.recipeapp.databinding.RecipeListFragmentBinding
+import com.edwin.recipeapp.domain.Recipe
+import com.edwin.recipeapp.presentation.ui.util.OnItemClickListener
 import com.edwin.recipeapp.util.Resource
 import com.edwin.recipeapp.util.onQueryTextChanged
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,9 +24,7 @@ import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 @ExperimentalCoroutinesApi
-class RecipeListFragment : Fragment(R.layout.recipe_list_fragment),
-    RecipeAdapter.OnItemClickListener {
-
+class RecipeListFragment : Fragment(R.layout.recipe_list_fragment) {
     private val viewModel: RecipeListViewModel by viewModels()
     private lateinit var searchView: SearchView
 
@@ -33,7 +32,9 @@ class RecipeListFragment : Fragment(R.layout.recipe_list_fragment),
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         val binding = RecipeListFragmentBinding.bind(view)
-        val recipeAdapter = RecipeAdapter(this)
+
+        val onRecipeClick = OnItemClickListener<Recipe> { viewModel.onRecipeSelected(it.uuid) }
+        val recipeAdapter = RecipeAdapter(onRecipeClick)
 
         binding.apply {
             recyclerViewRecipe.apply {
@@ -47,9 +48,9 @@ class RecipeListFragment : Fragment(R.layout.recipe_list_fragment),
             recipeAdapter.submitList(result.data)
 
             binding.progressBar.isVisible =
-                result is Resource.Loading && result.data.isNullOrEmpty()
+                    result is Resource.Loading && result.data.isNullOrEmpty()
             binding.textViewError.isVisible =
-                result is Resource.Error && result.data.isNullOrEmpty()
+                    result is Resource.Error && result.data.isNullOrEmpty()
             binding.textViewError.text = result.error?.localizedMessage
         })
 
@@ -58,19 +59,14 @@ class RecipeListFragment : Fragment(R.layout.recipe_list_fragment),
                 when (event) {
                     is RecipeListViewModel.RecipeListEvents.NavigateToRecipeDetailScreen -> {
                         val action =
-                            RecipeListFragmentDirections.actionRecipeListFragmentToRecipeDetailsFragment(
-                                event.recipe,
-                                event.recipe.name
-                            )
+                                RecipeListFragmentDirections.actionRecipeListFragmentToRecipeDetailsFragment(
+                                        event.uuid
+                                )
                         findNavController().navigate(action)
                     }
                 }
             }
         }
-    }
-
-    override fun onItemClick(recipe: Recipe) {
-        viewModel.onRecipeSelected(recipe)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

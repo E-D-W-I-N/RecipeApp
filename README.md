@@ -8,6 +8,7 @@
 - Hilt
 - Glide
 
-<img src="https://user-images.githubusercontent.com/22594525/113262420-c769a180-92fa-11eb-9062-e4e38c5670a4.png" width="300" height="600">
-<img src="https://user-images.githubusercontent.com/22594525/113262426-c9336500-92fa-11eb-8dc1-38ab1e124dc9.png" width="300" height="600">
-<img src="https://user-images.githubusercontent.com/22594525/113262431-cafd2880-92fa-11eb-94e9-3e74193c4113.png" width="300" height="600">
+| | | |
+|:-------------------------:|:-------------------------:|:-------------------------:|
+|<img width="1604" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://user-images.githubusercontent.com/22594525/115122213-011bf700-9fe1-11eb-8950-a1f48451480a.png">|  <img width="1604" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://user-images.githubusercontent.com/22594525/115122217-037e5100-9fe1-11eb-9d36-85374a38aa50.png">|<img width="1604" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://user-images.githubusercontent.com/22594525/115122220-05e0ab00-9fe1-11eb-9c38-9f357d22aca4.png">|
+|<img width="1604" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://user-images.githubusercontent.com/22594525/115122221-0711d800-9fe1-11eb-979b-6a6244243e2c.png">  |  <img width="1604" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://user-images.githubusercontent.com/22594525/115122223-08430500-9fe1-11eb-9c0e-d4d6496095f4.png">|

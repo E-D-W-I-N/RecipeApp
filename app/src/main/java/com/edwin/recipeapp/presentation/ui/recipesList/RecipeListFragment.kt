@@ -30,7 +30,6 @@ class RecipeListFragment : Fragment(R.layout.recipe_list_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
         val binding = RecipeListFragmentBinding.bind(view)
 
         val onRecipeClick = OnItemClickListener<Recipe> { viewModel.onRecipeSelected(it.uuid) }
@@ -48,9 +47,9 @@ class RecipeListFragment : Fragment(R.layout.recipe_list_fragment) {
             recipeAdapter.submitList(result.data)
 
             binding.progressBar.isVisible =
-                result is Resource.Loading && result.data.isNullOrEmpty()
+                    result is Resource.Loading && result.data.isNullOrEmpty()
             binding.textViewError.isVisible =
-                result is Resource.Error && result.data.isNullOrEmpty()
+                    result is Resource.Error && result.data.isNullOrEmpty()
             binding.textViewError.text = result.error?.localizedMessage
         })
 
@@ -59,14 +58,15 @@ class RecipeListFragment : Fragment(R.layout.recipe_list_fragment) {
                 when (event) {
                     is RecipeListViewModel.RecipeListEvents.NavigateToRecipeDetailScreen -> {
                         val action =
-                            RecipeListFragmentDirections.actionRecipeListFragmentToRecipeDetailsFragment(
-                                event.uuid
-                            )
+                                RecipeListFragmentDirections.actionRecipeListFragmentToRecipeDetailsFragment(
+                                        event.uuid
+                                )
                         findNavController().navigate(action)
                     }
                 }
             }
         }
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

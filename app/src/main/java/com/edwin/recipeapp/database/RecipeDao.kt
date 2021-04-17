@@ -11,14 +11,14 @@ interface RecipeDao {
 
     fun getRecipes(query: String, sortOrder: SortOrder): Flow<List<Recipe>> =
             when (sortOrder) {
-                SortOrder.BY_NAME -> getAllRecipesByName(query)
-                SortOrder.BY_DATE -> getAllRecipesByDate(query)
+                SortOrder.BY_NAME -> getAllRecipesByName("%$query%")
+                SortOrder.BY_DATE -> getAllRecipesByDate("%$query%")
             }
 
-    @Query("SELECT * FROM recipe WHERE name OR description OR instructions LIKE '%' || :searchQuery || '%' ORDER BY name")
+    @Query("SELECT * FROM recipe WHERE name LIKE :searchQuery OR description LIKE :searchQuery OR instructions LIKE :searchQuery ORDER BY name")
     fun getAllRecipesByName(searchQuery: String): Flow<List<Recipe>>
 
-    @Query("SELECT * FROM recipe WHERE name OR description OR instructions LIKE '%' || :searchQuery || '%' ORDER BY lastUpdated")
+    @Query("SELECT * FROM recipe WHERE name LIKE :searchQuery OR description LIKE :searchQuery OR instructions LIKE :searchQuery ORDER BY lastUpdated")
     fun getAllRecipesByDate(searchQuery: String): Flow<List<Recipe>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

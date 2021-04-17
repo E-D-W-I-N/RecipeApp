@@ -9,40 +9,40 @@ import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class RecipeRepository @Inject constructor(
-    private val api: RecipeApi,
-    private val db: RecipeDatabase
+        private val api: RecipeApi,
+        private val db: RecipeDatabase
 ) {
     private val recipeDao = db.recipeDao()
 
     fun getRecipes(query: String, sortOrder: SortOrder) = networkBoundResource(
-        query = {
-            recipeDao.getRecipes(query, sortOrder)
-        },
-        fetch = {
-            delay(3000)
-            api.getRecipes()
-        },
-        saveFetchResult = { recipes ->
-            db.withTransaction {
-                recipeDao.deleteAllRecipes()
-                recipeDao.insertRecipes(recipes.recipes)
+            query = {
+                recipeDao.getRecipes(query, sortOrder)
+            },
+            fetch = {
+                delay(1000)
+                api.getRecipes()
+            },
+            saveFetchResult = { recipes ->
+                db.withTransaction {
+                    recipeDao.deleteAllRecipes()
+                    recipeDao.insertRecipes(recipes.recipes)
+                }
             }
-        }
     )
 
-    fun getRecipe(uuid: String) = networkBoundResource(
-        query = {
-            recipeDao.getRecipe(uuid)
-        },
-        fetch = {
-            delay(3000)
-            api.getRecipe(uuid)
-        },
-        saveFetchResult = { response ->
-            db.withTransaction {
-                recipeDao.deleteRecipe(response.recipe)
-                recipeDao.insertRecipe(response.recipe)
+    fun getRecipeDetails(uuid: String) = networkBoundResource(
+            query = {
+                recipeDao.getRecipeDetails(uuid)
+            },
+            fetch = {
+                delay(1000)
+                api.getRecipeDetails(uuid)
+            },
+            saveFetchResult = { response ->
+                db.withTransaction {
+                    recipeDao.deleteRecipeDetails(response.recipeDetails)
+                    recipeDao.insertRecipeDetails(response.recipeDetails)
+                }
             }
-        }
     )
 }

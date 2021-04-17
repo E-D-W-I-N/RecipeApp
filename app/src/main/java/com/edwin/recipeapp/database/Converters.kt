@@ -17,13 +17,13 @@ class Converters {
     }
 
     @TypeConverter
-    fun fromRecipeBriefList(value: List<RecipeBrief>?): String {
+    fun fromRecipeBriefList(value: List<RecipeBrief>): String {
         val type = object : TypeToken<List<RecipeBrief>>() {}.type
         return Gson().toJson(value, type)
     }
 
     @TypeConverter
-    fun toRecipeBriefList(value: String): List<RecipeBrief>? {
+    fun toRecipeBriefList(value: String): List<RecipeBrief> {
         val type = object : TypeToken<List<RecipeBrief>>() {}.type
         return Gson().fromJson(value, type)
     }

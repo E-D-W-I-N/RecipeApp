@@ -2,6 +2,7 @@ package com.edwin.recipeapp.database
 
 import androidx.room.*
 import com.edwin.recipeapp.domain.Recipe
+import com.edwin.recipeapp.domain.RecipeDetails
 import com.edwin.recipeapp.util.SortOrder
 import kotlinx.coroutines.flow.Flow
 
@@ -9,10 +10,10 @@ import kotlinx.coroutines.flow.Flow
 interface RecipeDao {
 
     fun getRecipes(query: String, sortOrder: SortOrder): Flow<List<Recipe>> =
-        when (sortOrder) {
-            SortOrder.BY_NAME -> getAllRecipesByName(query)
-            SortOrder.BY_DATE -> getAllRecipesByDate(query)
-        }
+            when (sortOrder) {
+                SortOrder.BY_NAME -> getAllRecipesByName(query)
+                SortOrder.BY_DATE -> getAllRecipesByDate(query)
+            }
 
     @Query("SELECT * FROM recipe WHERE name OR description OR instructions LIKE '%' || :searchQuery || '%' ORDER BY name")
     fun getAllRecipesByName(searchQuery: String): Flow<List<Recipe>>
@@ -26,12 +27,12 @@ interface RecipeDao {
     @Query("DELETE FROM recipe")
     suspend fun deleteAllRecipes()
 
-    @Query("SELECT * FROM recipe WHERE uuid == :uuid")
-    fun getRecipe(uuid: String): Flow<Recipe>
+    @Query("SELECT * FROM recipeDetails WHERE uuid == :uuid")
+    fun getRecipeDetails(uuid: String): Flow<RecipeDetails>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRecipe(recipe: Recipe)
+    suspend fun insertRecipeDetails(recipeDetails: RecipeDetails)
 
     @Delete
-    suspend fun deleteRecipe(recipe: Recipe)
+    suspend fun deleteRecipeDetails(recipeDetails: RecipeDetails)
 }

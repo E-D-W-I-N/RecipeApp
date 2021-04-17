@@ -59,19 +59,17 @@ class RecipeDetailsFragment : Fragment(R.layout.recipe_details_fragment) {
                 detailTextName.text = result.data?.name
                 val date = result.data?.lastUpdated ?: 0
                 detailTextDate.text = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-                    .format(Date(date * 1000))
+                        .format(Date(date * 1000))
                 detailTextDescription.text = result.data?.description
                 detailDifficultyBar.rating = result.data?.difficulty?.toFloat() ?: 0.0f
                 detailTextInstructions.text = result.data?.instructions
 
                 viewPagerAdapterRecommended.submitList(result.data?.similar)
 
-                binding.progressBar.isVisible =
-                    result is Resource.Loading && result.data?.similar.isNullOrEmpty()
-                binding.textViewError.isVisible =
-                    result is Resource.Error && result.data?.similar.isNullOrEmpty()
+                binding.progressBar.isVisible = result is Resource.Loading && result.data == null
+                binding.textViewError.isVisible = result is Resource.Error && result.data == null
                 binding.textViewError.text = result.error?.localizedMessage
-                binding.scrollView.isVisible = viewPagerAdapterPicture.itemCount > 0
+                binding.scrollView.isVisible = result.data?.name?.isNotEmpty() == true
             })
         }
 
@@ -80,16 +78,16 @@ class RecipeDetailsFragment : Fragment(R.layout.recipe_details_fragment) {
                 when (event) {
                     is RecipeDetailsViewModel.RecipeDetailsEvents.NavigateToRecommendedRecipe -> {
                         val action =
-                            RecipeDetailsFragmentDirections.actionRecipeDetailsFragmentSelf(
-                                event.uuid
-                            )
+                                RecipeDetailsFragmentDirections.actionRecipeDetailsFragmentSelf(
+                                        event.uuid
+                                )
                         findNavController().navigate(action)
                     }
                     is RecipeDetailsViewModel.RecipeDetailsEvents.NavigateToRecipePicture -> {
                         val action =
-                            RecipeDetailsFragmentDirections.actionRecipeDetailsFragmentToRecipePictureFragment(
-                                event.imageUrl
-                            )
+                                RecipeDetailsFragmentDirections.actionRecipeDetailsFragmentToRecipePictureFragment(
+                                        event.imageUrl
+                                )
                         findNavController().navigate(action)
                     }
                 }

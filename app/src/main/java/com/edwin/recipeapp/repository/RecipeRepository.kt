@@ -5,7 +5,6 @@ import com.edwin.recipeapp.database.RecipeDatabase
 import com.edwin.recipeapp.network.RecipeApi
 import com.edwin.recipeapp.util.SortOrder
 import com.edwin.recipeapp.util.networkBoundResource
-import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class RecipeRepository @Inject constructor(
@@ -19,7 +18,6 @@ class RecipeRepository @Inject constructor(
                 recipeDao.getRecipes(query, sortOrder)
             },
             fetch = {
-                delay(1000)
                 api.getRecipes()
             },
             saveFetchResult = { recipes ->
@@ -35,7 +33,6 @@ class RecipeRepository @Inject constructor(
                 recipeDao.getRecipeDetails(uuid)
             },
             fetch = {
-                delay(1000)
                 api.getRecipeDetails(uuid)
             },
             saveFetchResult = { response ->

@@ -48,10 +48,12 @@ class RecipeDetailsFragment : Fragment(R.layout.recipe_details_fragment) {
             viewPagerPictures.adapter = viewPagerAdapterPicture
             TabLayoutMediator(pagerTabLayout, viewPagerPictures) { _, _ -> }.attach()
 
-            viewPagerRecommended.adapter = viewPagerAdapterRecommended
-            viewPagerRecommended.offscreenPageLimit = 3
-            viewPagerRecommended.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-            viewPagerRecommended.setPageTransformer(compositePageTransformer)
+            viewPagerRecommended.apply {
+                adapter = viewPagerAdapterRecommended
+                offscreenPageLimit = 3
+                getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+                setPageTransformer(compositePageTransformer)
+            }
 
             viewModel.recipe?.observe(viewLifecycleOwner, { result ->
                 viewPagerAdapterPicture.submitList(result.data?.images)

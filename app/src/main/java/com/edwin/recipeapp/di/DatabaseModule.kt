@@ -2,7 +2,7 @@ package com.edwin.recipeapp.di
 
 import android.app.Application
 import androidx.room.Room
-import com.edwin.recipeapp.database.RecipeDatabase
+import com.edwin.recipeapp.data.database.RecipeDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

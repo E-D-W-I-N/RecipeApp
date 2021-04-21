@@ -1,6 +1,6 @@
 package com.edwin.recipeapp.di
 
-import com.edwin.recipeapp.network.RecipeApi
+import com.edwin.recipeapp.data.network.RecipeApi
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides

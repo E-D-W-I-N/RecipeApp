@@ -2,8 +2,12 @@ package com.edwin.recipeapp.domain
 
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Parcelize
 @Entity(tableName = "recipe")
@@ -14,5 +18,11 @@ data class Recipe(
         val lastUpdated: Long,
         val description: String?,
         val instructions: String?,
-        val difficulty: Int
-) : Parcelable
+        val difficulty: Float
+) : Parcelable {
+    @Ignore
+    @IgnoredOnParcel
+    // $lastUpdated multiplied by 1000 because Date takes timestamp in milliseconds
+    val updateDate: String = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+            .format(Date(lastUpdated * 1000))
+}

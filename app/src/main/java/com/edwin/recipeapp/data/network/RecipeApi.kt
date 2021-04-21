@@ -1,7 +1,7 @@
-package com.edwin.recipeapp.network
+package com.edwin.recipeapp.data.network
 
-import com.edwin.recipeapp.network.response.RecipeDetailsResponse
-import com.edwin.recipeapp.network.response.RecipeListResponse
+import com.edwin.recipeapp.data.network.response.RecipeDetailsResponse
+import com.edwin.recipeapp.data.network.response.RecipeListResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 

@@ -1,8 +1,8 @@
 package com.edwin.recipeapp.di
 
-import com.edwin.recipeapp.database.RecipeDatabase
-import com.edwin.recipeapp.network.RecipeApi
-import com.edwin.recipeapp.repository.RecipeRepository
+import com.edwin.recipeapp.data.database.RecipeDatabase
+import com.edwin.recipeapp.data.network.RecipeApi
+import com.edwin.recipeapp.data.repository.RecipeRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,8 +20,8 @@ object RepositoryModule {
             db: RecipeDatabase
     ): RecipeRepository {
         return RecipeRepository(
-                api = api,
-                db = db
+                recipeApi = api,
+                recipeDao = db.recipeDao()
         )
     }
 }

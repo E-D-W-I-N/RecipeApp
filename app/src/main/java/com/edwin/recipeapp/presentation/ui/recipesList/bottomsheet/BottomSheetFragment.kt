@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.edwin.recipeapp.R
+import com.edwin.recipeapp.data.util.SortOrder
 import com.edwin.recipeapp.databinding.BottomSheetFragmentBinding
-import com.edwin.recipeapp.util.SortOrder
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,9 +17,9 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     private val viewModel: BottomSheetViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.bottom_sheet_fragment, container, false)
     }

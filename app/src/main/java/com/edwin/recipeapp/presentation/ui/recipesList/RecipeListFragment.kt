@@ -9,18 +9,16 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.edwin.recipeapp.R
+import com.edwin.recipeapp.data.util.Resource
 import com.edwin.recipeapp.databinding.RecipeListFragmentBinding
 import com.edwin.recipeapp.domain.Recipe
-import com.edwin.recipeapp.presentation.ui.util.OnItemClickListener
-import com.edwin.recipeapp.util.Resource
-import com.edwin.recipeapp.util.onQueryTextChanged
+import com.edwin.recipeapp.presentation.util.OnItemClickListener
+import com.edwin.recipeapp.presentation.util.onQueryTextChanged
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 @ExperimentalCoroutinesApi
@@ -31,42 +29,34 @@ class RecipeListFragment : Fragment(R.layout.recipe_list_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = RecipeListFragmentBinding.bind(view)
-
-        val onRecipeClick = OnItemClickListener<Recipe> { viewModel.onRecipeSelected(it.uuid) }
-        val recipeAdapter = RecipeAdapter(onRecipeClick)
-
-        binding.apply {
-            recyclerViewRecipe.apply {
-                adapter = recipeAdapter
-                layoutManager = LinearLayoutManager(requireContext())
-                setHasFixedSize(true)
-            }
-        }
-
-        viewModel.recipes.observe(viewLifecycleOwner, { result ->
-            recipeAdapter.submitList(result.data)
-
-            binding.progressBar.isVisible =
-                    result is Resource.Loading && result.data.isNullOrEmpty()
-            binding.textViewError.isVisible =
-                    result is Resource.Error && result.data.isNullOrEmpty()
-            binding.textViewError.text = result.error?.localizedMessage
-        })
-
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.recipesEvent.collect { event ->
-                when (event) {
-                    is RecipeListViewModel.RecipeListEvents.NavigateToRecipeDetailScreen -> {
-                        val action =
-                                RecipeListFragmentDirections.actionRecipeListFragmentToRecipeDetailsFragment(
-                                        event.uuid
-                                )
-                        findNavController().navigate(action)
-                    }
-                }
-            }
-        }
+        setupViewPager(binding)
+        bindData(binding)
         setHasOptionsMenu(true)
+    }
+
+    private val onRecipeClick = OnItemClickListener<Recipe> { recipe ->
+        val action = RecipeListFragmentDirections.actionRecipeListFragmentToRecipeDetailsFragment(
+                recipe.uuid
+        )
+        findNavController().navigate(action)
+    }
+    private val recipeListAdapter = RecipeListAdapter(onRecipeClick)
+
+    private fun setupViewPager(binding: RecipeListFragmentBinding) = with(binding) {
+        recyclerViewRecipe.apply {
+            adapter = recipeListAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
+        }
+    }
+
+    private fun bindData(binding: RecipeListFragmentBinding) = with(binding) {
+        viewModel.recipes.observe(viewLifecycleOwner, { result ->
+            recipeListAdapter.submitList(result.data)
+            progressBar.isVisible = result is Resource.Loading && result.data.isNullOrEmpty()
+            textViewError.isVisible = result is Resource.Error && result.data.isNullOrEmpty()
+            textViewError.text = result.error?.localizedMessage
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

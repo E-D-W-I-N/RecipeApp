@@ -2,11 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:title="@string/search"
+        android:id="@+id/action_favorite"
         android:icon="@drawable/ic_favorite"
+        android:title="@string/add_to_favorites"
         app:showAsAction="always" />
     <item
-        android:title="@string/sort"
+        android:id="@+id/action_share"
         android:icon="@drawable/ic_share"
+        android:title="@string/share"
         app:showAsAction="ifRoom" />
 </menu>

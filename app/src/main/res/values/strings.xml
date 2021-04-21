@@ -5,10 +5,19 @@
     <string name="sort">Sort</string>
     <string name="sort_by_name">Sort by name</string>
     <string name="sort_by_date">Sort by date</string>
-    <string name="room_service_icon">room_service_icon</string>
-    <string name="today_icon">today_icon</string>
     <string name="difficulty">Difficulty</string>
     <string name="instruction">Instruction</string>
     <string name="recommended">Recommended</string>
     <string name="download">Download</string>
+    <string name="share">Share</string>
+    <string name="add_to_favorites">Add to favorites</string>
+    <string name="favorites_toast_text">Favorites will be implemented soon</string>
+    <string name="share_toast_text">Share will be implemented soon</string>
+    <string name="permission_granted">Permission granted</string>
+    <string name="permission_denied">Permission denied</string>
+    <string name="image_downloaded">Image downloaded</string>
+    <string name="permission_dialog_message">Permission to access your storage is required to use this function</string>
+    <string name="permission_dialog_title">Permission required</string>
+    <string name="positive_button_text">OK</string>
+    <string name="negative_button_text">No, thanks</string>
 </resources>

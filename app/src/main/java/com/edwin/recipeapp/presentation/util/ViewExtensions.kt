@@ -1,4 +1,4 @@
-package com.edwin.recipeapp.util
+package com.edwin.recipeapp.presentation.util
 
 import androidx.appcompat.widget.SearchView
 

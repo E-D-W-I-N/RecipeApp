@@ -1,4 +1,4 @@
-package com.edwin.recipeapp.network.response
+package com.edwin.recipeapp.data.network.response
 
 import com.edwin.recipeapp.domain.Recipe
 import com.google.gson.annotations.SerializedName

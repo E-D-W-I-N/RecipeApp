@@ -20,30 +20,27 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.edwin.recipeapp.R
 import com.edwin.recipeapp.databinding.RecipePicuterFragmentBinding
-import com.edwin.recipeapp.util.saveToGallery
+import com.edwin.recipeapp.presentation.util.loadImage
+import com.edwin.recipeapp.presentation.util.saveToGallery
 
 
 class RecipePictureFragment : Fragment(R.layout.recipe_picuter_fragment) {
-
     private val viewModel: RecipePictureViewModel by viewModels()
 
     private val requestPermissionLauncher =
             registerForActivityResult(RequestPermission()
             ) { isGranted: Boolean ->
                 if (isGranted) {
-                    Toast.makeText(requireContext(), "Permission granted", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), getString(R.string.permission_granted), Toast.LENGTH_LONG).show()
                 } else {
-                    Toast.makeText(requireContext(), "Permission denied", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), getString(R.string.permission_denied), Toast.LENGTH_LONG).show()
                 }
             }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = RecipePicuterFragmentBinding.bind(view)
-        Glide.with(requireContext())
-                .asBitmap()
-                .load(viewModel.imageUrl)
-                .into(binding.recipePicture)
+        binding.recipePicture.loadImage(requireContext(), viewModel.imageUrl)
         setHasOptionsMenu(true)
     }
 
@@ -86,17 +83,17 @@ class RecipePictureFragment : Fragment(R.layout.recipe_picuter_fragment) {
 
                     override fun onLoadCleared(placeholder: Drawable?) {}
                 })
-        Toast.makeText(requireContext(), "Image downloaded", Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(), getString(R.string.image_downloaded), Toast.LENGTH_LONG).show()
     }
 
     private fun showDialog() {
         AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme).apply { }
-                .setMessage("Permission to access your storage is required to use this function")
-                .setTitle("Permission required")
-                .setPositiveButton("OK") { _, _ ->
+                .setMessage(getString(R.string.permission_dialog_message))
+                .setTitle(getString(R.string.permission_dialog_title))
+                .setPositiveButton(getString(R.string.positive_button_text)) { _, _ ->
                     requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 }
-                .setNegativeButton("No, thanks") { _, _ -> }
+                .setNegativeButton(getString(R.string.negative_button_text)) { _, _ -> }
                 .create().show()
     }
 }

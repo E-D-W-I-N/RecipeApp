@@ -1,4 +1,4 @@
-package com.edwin.recipeapp.util
+package com.edwin.recipeapp.data.util
 
 import android.content.Context
 import android.util.Log

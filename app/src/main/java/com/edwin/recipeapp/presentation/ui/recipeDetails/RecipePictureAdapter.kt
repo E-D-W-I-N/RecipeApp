@@ -1,54 +1,45 @@
 package com.edwin.recipeapp.presentation.ui.recipeDetails
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.edwin.recipeapp.databinding.ViewPagerPictureItemBinding
-import com.edwin.recipeapp.presentation.ui.util.OnItemClickListener
+import com.edwin.recipeapp.presentation.util.OnItemClickListener
+import com.edwin.recipeapp.presentation.util.loadImage
 
-class ViewPagerAdapterPicture(private val listener: OnItemClickListener<String>) :
-        ListAdapter<String, ViewPagerAdapterPicture.Pager2ViewHolder>(DiffCallback()) {
+class RecipePictureAdapter(private val listener: OnItemClickListener<String>) :
+        ListAdapter<String, RecipePictureAdapter.PictureViewHolder>(DiffCallback()) {
 
-    inner class Pager2ViewHolder(private val binding: ViewPagerPictureItemBinding) :
+    inner class PictureViewHolder(private val binding: ViewPagerPictureItemBinding) :
             RecyclerView.ViewHolder(binding.root) {
 
         init {
-            binding.apply {
-                root.setOnClickListener {
-                    val position = adapterPosition
-                    listener.onItemClick(getItem(position))
-                }
+            binding.root.setOnClickListener {
+                val position = adapterPosition
+                listener.onItemClick(getItem(position))
             }
         }
 
         fun bind(image: String) {
-            binding.apply {
-                Glide.with(itemView)
-                        .load(image)
-                        .placeholder(ColorDrawable(Color.WHITE))
-                        .into(imageView)
-            }
+            binding.imageView.loadImage(itemView.context, image)
         }
     }
 
     override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
-    ): ViewPagerAdapterPicture.Pager2ViewHolder {
+    ): RecipePictureAdapter.PictureViewHolder {
         val binding = ViewPagerPictureItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
         )
-        return Pager2ViewHolder(binding)
+        return PictureViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewPagerAdapterPicture.Pager2ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecipePictureAdapter.PictureViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 

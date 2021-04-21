@@ -1,4 +1,4 @@
-package com.edwin.recipeapp.util
+package com.edwin.recipeapp.presentation.util
 
 import android.content.ContentValues
 import android.content.Context
@@ -10,17 +10,21 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
 
+@Suppress("DEPRECATION")
 fun Bitmap.saveToGallery(context: Context) {
-    val filename = "${System.currentTimeMillis()}.png"
+    val fileName = "${System.currentTimeMillis()}.png"
+    val fileType = "image/png"
+    val folder = "RecipeApp"
+
     val write: (OutputStream) -> Boolean = {
         this.compress(Bitmap.CompressFormat.PNG, 100, it)
     }
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
         val contentValues = ContentValues().apply {
-            put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
-            put(MediaStore.MediaColumns.MIME_TYPE, "image/png")
-            put(MediaStore.MediaColumns.RELATIVE_PATH, "${Environment.DIRECTORY_PICTURES}/RecipeApp")
+            put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
+            put(MediaStore.MediaColumns.MIME_TYPE, fileType)
+            put(MediaStore.MediaColumns.RELATIVE_PATH, "${Environment.DIRECTORY_PICTURES}/$folder")
         }
 
         context.contentResolver.let {
@@ -29,12 +33,14 @@ fun Bitmap.saveToGallery(context: Context) {
             }
         }
     } else {
-        val imagesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString() + File.separator + "RecipeApp"
+        val imagesDir = Environment
+                .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+                .toString() + File.separator + folder
         val file = File(imagesDir)
         if (!file.exists()) {
             file.mkdir()
         }
-        val image = File(imagesDir, filename)
+        val image = File(imagesDir, fileName)
         write(FileOutputStream(image))
     }
 }

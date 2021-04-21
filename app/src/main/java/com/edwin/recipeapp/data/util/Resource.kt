@@ -1,4 +1,4 @@
-package com.edwin.recipeapp.util
+package com.edwin.recipeapp.data.util
 
 sealed class Resource<T>(
         val data: T? = null,

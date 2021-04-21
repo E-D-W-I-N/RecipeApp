@@ -1,4 +1,4 @@
-package com.edwin.recipeapp.database
+package com.edwin.recipeapp.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

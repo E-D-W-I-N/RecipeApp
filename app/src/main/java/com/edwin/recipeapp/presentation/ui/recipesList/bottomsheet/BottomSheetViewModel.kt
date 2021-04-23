@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BottomSheetViewModel @Inject constructor(
-        private val preferencesManager: PreferencesManager
+    private val preferencesManager: PreferencesManager
 ) : ViewModel() {
 
     fun onSortOrderSelected(sortOrder: SortOrder) = viewModelScope.launch {

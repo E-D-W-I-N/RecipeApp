@@ -7,13 +7,13 @@ import com.google.gson.reflect.TypeToken
 
 class Converters {
     @TypeConverter
-    fun fromString(stringListString: String): List<String> {
-        return stringListString.split("<&>").map { it }
+    fun fromStringList(stringList: List<String>): String {
+        return stringList.joinToString(separator = "<&>")
     }
 
     @TypeConverter
-    fun toString(stringList: List<String>): String {
-        return stringList.joinToString(separator = "<&>")
+    fun toStringList(stringListString: String): List<String> {
+        return stringListString.split("<&>").map { it }
     }
 
     @TypeConverter

@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 
 fun ImageView.loadImage(context: Context, imageUrl: String?) {
     Glide.with(context)
-            .load(imageUrl)
-            .placeholder(ColorDrawable(Color.WHITE))
-            .into(this)
+        .load(imageUrl)
+        .placeholder(ColorDrawable(Color.WHITE))
+        .into(this)
 }

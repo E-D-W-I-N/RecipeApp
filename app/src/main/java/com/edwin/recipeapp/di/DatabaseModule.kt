@@ -15,9 +15,10 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(app: Application) =
-            Room.databaseBuilder(app, RecipeDatabase::class.java, "recipe_database")
-                    .build()
+    fun provideDatabase(
+        app: Application
+    ) = Room.databaseBuilder(app, RecipeDatabase::class.java, "recipe_database")
+        .build()
 
     @Provides
     fun provideRecipeDao(database: RecipeDatabase) = database.recipeDao()

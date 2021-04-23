@@ -18,8 +18,8 @@ object NetworkModule {
     @Singleton
     fun provideRecipeApi(): RecipeApi {
         return Retrofit.Builder()
-                .baseUrl("https://test.kode-t.ru/")
-                .addConverterFactory(create(GsonBuilder().create()))
-                .build().create(RecipeApi::class.java)
+            .baseUrl("https://test.kode-t.ru/")
+            .addConverterFactory(create(GsonBuilder().create()))
+            .build().create(RecipeApi::class.java)
     }
 }

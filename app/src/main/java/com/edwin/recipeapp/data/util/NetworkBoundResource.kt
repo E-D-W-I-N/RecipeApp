@@ -3,10 +3,10 @@ package com.edwin.recipeapp.data.util
 import kotlinx.coroutines.flow.*
 
 inline fun <ResultType, RequestType> networkBoundResource(
-        crossinline query: () -> Flow<ResultType>,
-        crossinline fetch: suspend () -> RequestType,
-        crossinline saveFetchResult: suspend (RequestType) -> Unit,
-        crossinline shouldFetch: (ResultType) -> Boolean = { true }
+    crossinline query: () -> Flow<ResultType>,
+    crossinline fetch: suspend () -> RequestType,
+    crossinline saveFetchResult: suspend (RequestType) -> Unit,
+    crossinline shouldFetch: (ResultType) -> Boolean = { true }
 ) = flow {
     val data = query().first()
 

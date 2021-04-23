@@ -10,14 +10,14 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
 
-@Suppress("DEPRECATION")
 fun Bitmap.saveToGallery(context: Context) {
     val fileName = "${System.currentTimeMillis()}.png"
     val fileType = "image/png"
     val folder = "RecipeApp"
+    val imageQuality = 100
 
-    val write: (OutputStream) -> Boolean = {
-        this.compress(Bitmap.CompressFormat.PNG, 100, it)
+    val write: (OutputStream) -> Boolean = { outputStream ->
+        this.compress(Bitmap.CompressFormat.PNG, imageQuality, outputStream)
     }
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -33,9 +33,10 @@ fun Bitmap.saveToGallery(context: Context) {
             }
         }
     } else {
+        @Suppress("DEPRECATION")
         val imagesDir = Environment
-                .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-                .toString() + File.separator + folder
+            .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+            .toString() + File.separator + folder
         val file = File(imagesDir)
         if (!file.exists()) {
             file.mkdir()

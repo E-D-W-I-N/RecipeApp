@@ -16,12 +16,12 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideRecipeRepository(
-            api: RecipeApi,
-            db: RecipeDatabase
+        api: RecipeApi,
+        db: RecipeDatabase
     ): RecipeRepository {
         return RecipeRepository(
-                recipeApi = api,
-                recipeDao = db.recipeDao()
+            recipeApi = api,
+            recipeDao = db.recipeDao()
         )
     }
 }

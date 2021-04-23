@@ -26,6 +26,14 @@ class RecipeListFragment : Fragment(R.layout.recipe_list_fragment) {
     private val viewModel: RecipeListViewModel by viewModels()
     private lateinit var searchView: SearchView
 
+    private val onRecipeClick = OnItemClickListener<Recipe> { recipe ->
+        val action = RecipeListFragmentDirections.actionRecipeListFragmentToRecipeDetailsFragment(
+            recipe.uuid
+        )
+        findNavController().navigate(action)
+    }
+    private val recipeListAdapter = RecipeListAdapter(onRecipeClick)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = RecipeListFragmentBinding.bind(view)
@@ -33,14 +41,6 @@ class RecipeListFragment : Fragment(R.layout.recipe_list_fragment) {
         bindData(binding)
         setHasOptionsMenu(true)
     }
-
-    private val onRecipeClick = OnItemClickListener<Recipe> { recipe ->
-        val action = RecipeListFragmentDirections.actionRecipeListFragmentToRecipeDetailsFragment(
-                recipe.uuid
-        )
-        findNavController().navigate(action)
-    }
-    private val recipeListAdapter = RecipeListAdapter(onRecipeClick)
 
     private fun setupViewPager(binding: RecipeListFragmentBinding) = with(binding) {
         recyclerViewRecipe.apply {

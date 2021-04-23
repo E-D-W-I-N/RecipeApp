@@ -10,10 +10,10 @@ import com.edwin.recipeapp.presentation.util.OnItemClickListener
 import com.edwin.recipeapp.presentation.util.loadImage
 
 class RecipePictureAdapter(private val listener: OnItemClickListener<String>) :
-        ListAdapter<String, RecipePictureAdapter.PictureViewHolder>(DiffCallback()) {
+    ListAdapter<String, RecipePictureAdapter.PictureViewHolder>(DiffCallback()) {
 
     inner class PictureViewHolder(private val binding: ViewPagerPictureItemBinding) :
-            RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.root.setOnClickListener {
@@ -28,13 +28,13 @@ class RecipePictureAdapter(private val listener: OnItemClickListener<String>) :
     }
 
     override fun onCreateViewHolder(
-            parent: ViewGroup,
-            viewType: Int
+        parent: ViewGroup,
+        viewType: Int
     ): RecipePictureAdapter.PictureViewHolder {
         val binding = ViewPagerPictureItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
         return PictureViewHolder(binding)
     }
@@ -45,9 +45,9 @@ class RecipePictureAdapter(private val listener: OnItemClickListener<String>) :
 
     class DiffCallback : DiffUtil.ItemCallback<String>() {
         override fun areItemsTheSame(oldItem: String, newItem: String): Boolean =
-                oldItem === newItem
+            oldItem === newItem
 
         override fun areContentsTheSame(oldItem: String, newItem: String): Boolean =
-                oldItem == newItem
+            oldItem == newItem
     }
 }

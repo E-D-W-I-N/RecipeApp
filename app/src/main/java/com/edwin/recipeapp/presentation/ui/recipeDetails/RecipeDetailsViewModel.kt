@@ -9,8 +9,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RecipeDetailsViewModel @Inject constructor(
-        repository: RecipeRepository,
-        state: SavedStateHandle
+    repository: RecipeRepository,
+    state: SavedStateHandle
 ) : ViewModel() {
     val uuid = state.get<String>("uuid")
     val recipe = uuid?.let { repository.getRecipeDetails(it) }?.asLiveData()

@@ -10,10 +10,10 @@ import kotlinx.coroutines.flow.Flow
 interface RecipeDao {
 
     fun getRecipes(query: String, sortOrder: SortOrder): Flow<List<Recipe>> =
-            when (sortOrder) {
-                SortOrder.BY_NAME -> getAllRecipesByName("%$query%")
-                SortOrder.BY_DATE -> getAllRecipesByDate("%$query%")
-            }
+        when (sortOrder) {
+            SortOrder.BY_NAME -> getAllRecipesByName("%$query%")
+            SortOrder.BY_DATE -> getAllRecipesByDate("%$query%")
+        }
 
     @Transaction
     suspend fun deleteAndInsertRecipesTransaction(recipes: List<Recipe>) {

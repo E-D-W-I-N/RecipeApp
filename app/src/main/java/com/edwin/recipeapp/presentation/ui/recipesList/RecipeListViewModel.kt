@@ -15,16 +15,16 @@ import javax.inject.Inject
 @HiltViewModel
 @ExperimentalCoroutinesApi
 class RecipeListViewModel @Inject constructor(
-        repository: RecipeRepository,
-        preferencesManager: PreferencesManager,
-        state: SavedStateHandle
+    repository: RecipeRepository,
+    preferencesManager: PreferencesManager,
+    state: SavedStateHandle
 ) : ViewModel() {
     val searchQuery = state.getLiveData("searchQuery", "")
     private val preferencesFlow = preferencesManager.readFromDataStore
 
     val recipes = combine(
-            searchQuery.asFlow(),
-            preferencesFlow
+        searchQuery.asFlow(),
+        preferencesFlow
     ) { query, sortOrder ->
         Pair(query, sortOrder)
     }.flatMapLatest { (query, sortOrder) ->

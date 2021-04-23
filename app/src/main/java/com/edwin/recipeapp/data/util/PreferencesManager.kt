@@ -23,20 +23,20 @@ class PreferencesManager @Inject constructor(@ApplicationContext context: Contex
     private val dataStore = context.createDataStore("user_preferences")
 
     val readFromDataStore = dataStore.data
-            .catch { exception ->
-                if (exception is IOException) {
-                    Log.e(TAG, "Error reading preferences", exception)
-                    emit(emptyPreferences())
-                } else {
-                    throw exception
-                }
+        .catch { exception ->
+            if (exception is IOException) {
+                Log.e(TAG, "Error reading preferences", exception)
+                emit(emptyPreferences())
+            } else {
+                throw exception
             }
-            .map { preferences ->
-                val sortOrder = SortOrder.valueOf(
-                        preferences[PreferencesKeys.SORT_ORDER] ?: SortOrder.BY_NAME.name
-                )
-                sortOrder
-            }
+        }
+        .map { preferences ->
+            val sortOrder = SortOrder.valueOf(
+                preferences[PreferencesKeys.SORT_ORDER] ?: SortOrder.BY_NAME.name
+            )
+            sortOrder
+        }
 
     suspend fun updateSortOrder(sortOrder: SortOrder) {
         dataStore.edit { settings ->
